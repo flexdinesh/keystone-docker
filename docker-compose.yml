@@ -1,0 +1,34 @@
+version: "3.4"
+services:
+  keystone-api:
+    build:
+      context: keystone-app
+      dockerfile: Dockerfile
+    ports: ["8080:8080"]
+    depends_on:
+      - "database"
+    command: >-
+      yarn start
+    # volumes:
+    #   - ./src:/var/service/src
+    networks:
+      - bridgenet
+    environment:
+      NODE_ENV: "production"
+      PORT: "8080"
+      DATABASE_URL: $DATABASE_URL
+      SESSION_SECRET: $SESSION_SECRET
+
+  database:
+    # use latest official postgres version
+    image: "postgres"
+    env_file:
+      # configure postgres
+      - postgres-db/setup.env
+    ports: ["5432:5432"]
+    networks:
+      - bridgenet
+
+networks:
+  bridgenet:
+    name: custom_network
