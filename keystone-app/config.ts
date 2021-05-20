@@ -2,7 +2,7 @@ require('dotenv').config();
 
 export const PORT = parseInt(process.env.PORT as string) || 8080;
 
-let dbURL = process.env.DATABASE_URL || 'postgres://username@localhost/dbname';
+let dbURL = process.env.DATABASE_URL || 'postgres://db_user:db_password@localhost:5432/db_schema';
 
 if (process.env.NODE_ENV === 'production' && !dbURL) {
     throw new Error(

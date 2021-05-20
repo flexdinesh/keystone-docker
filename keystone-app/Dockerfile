@@ -20,6 +20,7 @@ COPY package.json yarn.lock ./
 # Copy over other files needed to run the service.
 # COPY tsconfig.json config.default.json openapi.yml ./
 COPY config.ts tsconfig.json keystone.ts schema.ts schema.graphql schema.prisma ./
+COPY migrations migrations/
 
 # Install all dev dependencies (used to build typescript, for docker-compose, etc)
 RUN yarn install --frozen-lockfile
@@ -44,5 +45,5 @@ USER node
 EXPOSE 8080
 
 # Set default execution command.
-CMD yarn start
+CMD yarn migrate && yarn start
 

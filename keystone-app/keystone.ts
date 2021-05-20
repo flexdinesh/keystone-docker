@@ -35,6 +35,8 @@ export default auth.withAuth(
     db: {
       adapter: 'prisma_postgresql',
       url: DATABASE_URL,
+      useMigrations: true,
+      enableLogging: true,
     },
     server: { port: PORT },
     ui: {

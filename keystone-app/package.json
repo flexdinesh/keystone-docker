@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "keystone-next dev",
+    "migrate": "keystone-next prisma migrate deploy",
     "start": "keystone-next start",
     "build": "keystone-next build",
     "postinstall": "keystone-next postinstall"
